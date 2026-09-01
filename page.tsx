@@ -13,27 +13,33 @@ function SearchContent() {
   const [type, setType] = useState(sp.get('type') || '');
   const [verified, setVerified] = useState(false);
 
-  const filtered = useMemo(
-    () =>
-      properties.filter(
-        (p) =>
-          (!q ||
-            `${p.title} ${p.location} ${p.type}`
-              .toLowerCase()
-              .includes(q.toLowerCase())) &&
-          (!type ||
-            p.type.toLowerCase().includes(type.toLowerCase())) &&
-          (!verified || p.verified)
-      ),
-    [q, type, verified]
-  );
+  const filtered = useMemo(() => {
+    return properties.filter((p) => {
+      const matchesQuery =
+        !q ||
+        `${p.title} ${p.location} ${p.type}`
+          .toLowerCase()
+          .includes(q.toLowerCase());
+
+      const matchesType =
+        !type ||
+        p.type.toLowerCase().includes(type.toLowerCase());
+
+      const matchesVerified =
+        !verified || p.verified;
+
+      return matchesQuery && matchesType && matchesVerified;
+    });
+  }, [q, type, verified]);
 
   return (
     <div className="container">
       <div className="sectionhead">
         <div>
           <h2>Property search</h2>
-          <p className="muted">{filtered.length} properties found</p>
+          <p className="muted">
+            {filtered.length} properties found
+          </p>
         </div>
       </div>
 
@@ -59,9 +65,14 @@ function SearchContent() {
               onChange={(e) => setType(e.target.value)}
             >
               <option value="">Any</option>
-              {[...new Set(properties.map((p) => p.type))].map((t) => (
-                <option key={t}>{t}</option>
-              ))}
+
+              {[...new Set(properties.map((p) => p.type))].map(
+                (t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                )
+              )}
             </select>
           </p>
 
@@ -70,7 +81,9 @@ function SearchContent() {
               <input
                 type="checkbox"
                 checked={verified}
-                onChange={(e) => setVerified(e.target.checked)}
+                onChange={(e) =>
+                  setVerified(e.target.checked)
+                }
               />{' '}
               Verified only
             </label>
@@ -81,7 +94,10 @@ function SearchContent() {
           {filtered.length ? (
             <div className="results">
               {filtered.map((p) => (
-                <PropertyCard key={p.id} p={p} />
+                <PropertyCard
+                  key={p.id}
+                  p={p}
+                />
               ))}
             </div>
           ) : (
