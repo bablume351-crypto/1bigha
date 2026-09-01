@@ -1,1 +1,117 @@
-export default function Sell(){return <main className="section"><div className="container"><div className="panel" style={{maxWidth:850,margin:'0 auto'}}><h1 style={{fontFamily:'Playfair Display,serif'}}>List your property</h1><p className="muted">Start with the essential information. We can add verification, payments and seller tools in later versions.</p><form className="formgrid"><input className="input" placeholder="Property title"/><select className="input"><option>Property type</option><option>Agricultural Land</option><option>Residential Plot</option><option>Commercial Plot</option><option>Farm Land</option></select><input className="input" placeholder="State"/><input className="input" placeholder="District / City"/><input className="input" placeholder="Area (e.g. 5 Bigha)"/><input className="input" placeholder="Price"/><input className="input full" placeholder="Road access / nearby landmark"/><textarea className="input full" rows={5} placeholder="Describe the property"/><input className="input full" type="file" multiple/><button className="btn primary full" type="button" onClick={()=>alert('Demo listing received. Seller dashboard will be connected in V2.')}>Submit Property</button></form></div></div></main>}
+'use client';
+
+import { Suspense, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import PropertyCard from '@/components/PropertyCard';
+import { properties } from '@/lib/data';
+
+function SearchContent() {
+  const sp = useSearchParams();
+
+  const initial = sp.get('q') || '';
+  const [q, setQ] = useState(initial);
+  const [type, setType] = useState(sp.get('type') || '');
+  const [verified, setVerified] = useState(false);
+
+  const filtered = useMemo(
+    () =>
+      properties.filter(
+        (p) =>
+          (!q ||
+            `${p.title} ${p.location} ${p.type}`
+              .toLowerCase()
+              .includes(q.toLowerCase())) &&
+          (!type ||
+            p.type.toLowerCase().includes(type.toLowerCase())) &&
+          (!verified || p.verified)
+      ),
+    [q, type, verified]
+  );
+
+  return (
+    <div className="container">
+      <div className="sectionhead">
+        <div>
+          <h2>Property search</h2>
+          <p className="muted">{filtered.length} properties found</p>
+        </div>
+      </div>
+
+      <div className="searchlayout">
+        <aside className="sidebar">
+          <b>Filters</b>
+
+          <p>
+            <label>Search</label>
+            <input
+              className="input"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Location or keyword"
+            />
+          </p>
+
+          <p>
+            <label>Type</label>
+            <select
+              className="input"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option value="">Any</option>
+              {[...new Set(properties.map((p) => p.type))].map((t) => (
+                <option key={t}>{t}</option>
+              ))}
+            </select>
+          </p>
+
+          <p>
+            <label>
+              <input
+                type="checkbox"
+                checked={verified}
+                onChange={(e) => setVerified(e.target.checked)}
+              />{' '}
+              Verified only
+            </label>
+          </p>
+        </aside>
+
+        <section>
+          {filtered.length ? (
+            <div className="results">
+              {filtered.map((p) => (
+                <PropertyCard key={p.id} p={p} />
+              ))}
+            </div>
+          ) : (
+            <div className="empty">
+              <h3>No matching properties</h3>
+              <p className="muted">
+                Try a broader location or property type.
+              </p>
+            </div>
+          )}
+        </section>
+      </div>
+    </div>
+  );
+}
+
+export default function Search() {
+  return (
+    <main className="searchpage">
+      <Suspense
+        fallback={
+          <div className="section">
+            <div className="container">
+              <p>Loading properties...</p>
+            </div>
+          </div>
+        }
+      >
+        <SearchContent />
+      </Suspense>
+    </main>
+  );
+}
