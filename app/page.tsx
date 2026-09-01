@@ -109,9 +109,11 @@ function SearchContent() {
 export default function Search() {
   return (
     <main className="searchpage">
-      <Suspense fallback={<div className="container section">
-        <p>Loading properties...</p>
-      </div>}>
+      <Suspense fallback={
+        <div className="container section">
+          <p>Loading properties...</p>
+        </div>
+      }>
         <SearchContent />
       </Suspense>
     </main>
