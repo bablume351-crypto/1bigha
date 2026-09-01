@@ -8,8 +8,7 @@ import { properties } from '@/lib/data';
 function SearchContent() {
   const sp = useSearchParams();
 
-  const initial = sp.get('q') || '';
-  const [q, setQ] = useState(initial);
+  const [q, setQ] = useState(sp.get('q') || '');
   const [type, setType] = useState(sp.get('type') || '');
   const [verified, setVerified] = useState(false);
 
@@ -66,13 +65,11 @@ function SearchContent() {
             >
               <option value="">Any</option>
 
-              {[...new Set(properties.map((p) => p.type))].map(
-                (t) => (
-                  <option key={t} value={t}>
-                    {t}
-                  </option>
-                )
-              )}
+              {[...new Set(properties.map((p) => p.type))].map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
             </select>
           </p>
 
@@ -81,9 +78,7 @@ function SearchContent() {
               <input
                 type="checkbox"
                 checked={verified}
-                onChange={(e) =>
-                  setVerified(e.target.checked)
-                }
+                onChange={(e) => setVerified(e.target.checked)}
               />{' '}
               Verified only
             </label>
@@ -94,10 +89,7 @@ function SearchContent() {
           {filtered.length ? (
             <div className="results">
               {filtered.map((p) => (
-                <PropertyCard
-                  key={p.id}
-                  p={p}
-                />
+                <PropertyCard key={p.id} p={p} />
               ))}
             </div>
           ) : (
@@ -117,15 +109,9 @@ function SearchContent() {
 export default function Search() {
   return (
     <main className="searchpage">
-      <Suspense
-        fallback={
-          <div className="section">
-            <div className="container">
-              <p>Loading properties...</p>
-            </div>
-          </div>
-        }
-      >
+      <Suspense fallback={<div className="container section">
+        <p>Loading properties...</p>
+      </div>}>
         <SearchContent />
       </Suspense>
     </main>
