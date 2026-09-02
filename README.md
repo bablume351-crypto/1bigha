@@ -1,38 +1,18 @@
-# 1Bigha V1
+# 1Bigha Homepage v2
 
-A fast, responsive real-estate MVP for buying/selling land, plots and property.
+This package updates the existing 1Bigha Next.js project with the final simple 1Bigha logo and a responsive homepage.
 
-## Included
-- Homepage
-- Property search + filters
-- Property detail pages
-- Sell/list-property form
-- Responsive mobile/desktop UI
-- Demo property dataset
-- Simple verification badges
+## What changed
+- Final 1Bigha logo added at `public/1bigha-logo.png`
+- New premium responsive homepage at `app/page.tsx`
+- Updated shared header/footer in `app/layout.tsx`
+- Updated responsive styling in `app/globals.css`
+- Existing `/search`, `/sell`, and `/property/[id]` routes are retained
 
-## Run locally
-```bash
-npm install
-npm run dev
-```
-Then open http://localhost:3000.
+## Deploy
+1. Extract this ZIP.
+2. Upload/replace the project files in the GitHub repository. Keep the `app`, `components`, `lib`, and `public` folders as folders.
+3. Commit the changes.
+4. Vercel will automatically create a new deployment if the GitHub repository is connected.
 
-## Deploy on Vercel
-1. Create a GitHub repository and upload this folder.
-2. Import the repo into Vercel.
-3. Use the default Next.js build settings.
-4. Deploy.
-5. Point your 1Bigha domain at the Vercel project from the Vercel Domains screen.
-
-## V2 backlog
-- PostgreSQL/Supabase database
-- User login + mobile OTP
-- Real image storage
-- Real map integration
-- Buyer/seller dashboards
-- Admin approval panel
-- Property verification workflow
-- WhatsApp/contact integrations
-- Payments and promoted listings
-- AI search and property comparison
+Do not change the GoDaddy DNS for this homepage update.
