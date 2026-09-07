@@ -1,106 +1,217 @@
 import Link from 'next/link';
-import { ArrowRight, Building2, CheckCircle2, ChevronRight, MapPin, Search, ShieldCheck, Tractor, UserRoundCheck, Warehouse } from 'lucide-react';
+import {
+  ArrowRight,
+  Building2,
+  LandPlot,
+  MapPin,
+  Search,
+  ShieldCheck,
+  Tractor,
+  Warehouse,
+} from 'lucide-react';
 import { properties } from '@/lib/data';
 
-const categories = [
-  { title: 'Agricultural Land', text: 'Farming, investment & long-term growth', icon: Tractor, href: '/search?type=Agricultural%20Land', tone: 'green' },
-  { title: 'Residential Plots', text: 'Build your home in the right location', icon: Building2, href: '/search?type=Residential%20Plot', tone: 'sand' },
-  { title: 'Commercial Land', text: 'High-visibility land for business', icon: Warehouse, href: '/search?type=Commercial%20Plot', tone: 'blue' },
+const locations = [
+  {
+    name: 'Tronica City',
+    area: 'Ghaziabad',
+    route: 'Delhi – Meerut Expressway',
+    image: '/delhi-meerut.jpg',
+    query: 'Tronica City',
+  },
+  {
+    name: 'Ghaziabad',
+    area: 'NCR',
+    route: 'Eastern Peripheral Expressway',
+    image: '/eastern-peripheral.jpg',
+    query: 'Ghaziabad',
+  },
+  {
+    name: 'Baghpat',
+    area: 'Western UP',
+    route: 'Delhi – Dehradun Expressway',
+    image: '/delhi-dehradun.jpg',
+    query: 'Baghpat',
+  },
 ];
 
-const locations = ['Ghaziabad', 'Baghpat', 'Lucknow', 'Ballia'];
+const categories = [
+  { title: 'Agricultural', icon: Tractor, href: '/search?type=Agricultural%20Land' },
+  { title: 'Residential', icon: Building2, href: '/search?type=Residential%20Plot' },
+  { title: 'Industrial', icon: Warehouse, href: '/search?type=Industrial%20Land' },
+  { title: 'Commercial', icon: LandPlot, href: '/search?type=Commercial%20Plot' },
+];
 
 export default function Home() {
   return (
     <main className="home">
-      <section className="home-hero">
-        <div className="home-container home-hero-grid">
-          <div className="home-hero-copy">
-            <div className="home-eyebrow"><span className="home-eyebrow-dot" /> Land & property marketplace</div>
-            <h1>Find the right land.<br /><span>Build what comes next.</span></h1>
-            <p>Search land, plots and investment opportunities by location, budget and property type — all in one clear place.</p>
+      <section className="hero">
+        <div className="hero-collage" aria-hidden="true">
+          <div style={{ backgroundImage: "url('/delhi-meerut.jpg')" }} />
+          <div style={{ backgroundImage: "url('/eastern-peripheral.jpg')" }} />
+          <div style={{ backgroundImage: "url('/delhi-dehradun.jpg')" }} />
+        </div>
 
-            <form action="/search" className="home-search-card">
-              <div className="home-search-main">
-                <MapPin size={20} strokeWidth={2} />
-                <input name="q" aria-label="Location" placeholder="City, district, village or locality" />
+        <div className="hero-overlay" />
+
+        <div className="container hero-content">
+          <div className="hero-copy">
+            <span className="eyebrow">
+              <ShieldCheck size={15} /> 1Bigha
+            </span>
+
+            <h1>
+              Find the right land.
+              <span>Build your future.</span>
+            </h1>
+
+            <form action="/search" className="hero-search">
+              <div className="hero-field">
+                <MapPin size={20} />
+                <input
+                  name="q"
+                  placeholder="Tronica City, Ghaziabad, Baghpat"
+                  aria-label="Location"
+                />
               </div>
-              <select name="type" aria-label="Property type">
-                <option value="">Property type</option>
-                <option>Agricultural Land</option>
-                <option>Residential Plot</option>
-                <option>Commercial Plot</option>
-                <option>Farm Land</option>
-                <option>Industrial Land</option>
-              </select>
-              <button className="home-search-btn" type="submit"><Search size={19} /> Search</button>
+
+              <div className="hero-field">
+                <LandPlot size={20} />
+                <select name="type" defaultValue="">
+                  <option value="">All property types</option>
+                  <option>Agricultural Land</option>
+                  <option>Residential Plot</option>
+                  <option>Commercial Plot</option>
+                  <option>Industrial Land</option>
+                </select>
+              </div>
+
+              <button type="submit" className="hero-button">
+                <Search size={19} /> Search
+              </button>
             </form>
 
-            <div className="home-popular">
-              <span>Popular:</span>
-              {locations.map((location) => <Link key={location} href={`/search?q=${encodeURIComponent(location)}`}>{location}</Link>)}
+            <div className="hero-popular">
+              <span>Popular</span>
+              {locations.map((item) => (
+                <Link
+                  key={item.name}
+                  href={`/search?q=${encodeURIComponent(item.query)}`}
+                >
+                  {item.name}
+                </Link>
+              ))}
             </div>
           </div>
 
-          <div className="home-hero-visual" aria-hidden="true">
-            <div className="home-visual-image" />
-            <div className="home-visual-card home-visual-card-top">
-              <ShieldCheck size={18} />
-              <div><strong>Trust starts with clarity</strong><span>Clear property information</span></div>
-            </div>
-            <div className="home-visual-card home-visual-card-bottom">
-              <MapPin size={18} />
-              <div><strong>Explore by location</strong><span>Local land, wider opportunities</span></div>
-            </div>
-            <div className="home-plot-badge"><span>1</span><div>One place<br /><b>for land</b></div></div>
+          <div className="hero-side">
+            <strong>Your land, your future</strong>
+            <span>✓ Verified owners</span>
+            <span>✓ Clear deals</span>
+            <span>✓ Better locations</span>
+            <span>✓ Legal support</span>
           </div>
         </div>
       </section>
 
-      <section className="home-trust-strip">
-        <div className="home-container home-trust-grid">
-          <div><ShieldCheck size={21} /><span><b>Clear listings</b><small>Useful property details</small></span></div>
-          <div><UserRoundCheck size={21} /><span><b>Direct enquiries</b><small>Connect with sellers</small></span></div>
-          <div><MapPin size={21} /><span><b>Location-first search</b><small>Find land where you need it</small></span></div>
-          <div><CheckCircle2 size={21} /><span><b>Made for land</b><small>Simple, focused experience</small></span></div>
+      <section className="trust-strip">
+        <div className="container trust-grid">
+          <div><ShieldCheck size={20} /><b>Verified Owners</b></div>
+          <div><span className="rupee">₹</span><b>Better Deals</b></div>
+          <div><LandPlot size={20} /><b>Prime Locations</b></div>
+          <div><Building2 size={20} /><b>No Brokerage</b></div>
         </div>
       </section>
 
-      <section className="home-section home-section-tight">
-        <div className="home-container">
-          <div className="home-section-head">
-            <div><span className="home-kicker">EXPLORE</span><h2>Find land for your next move</h2><p>Start with the property type that matches your plan.</p></div>
+      <section className="section">
+        <div className="container">
+          <div className="heading-row">
+            <div>
+              <span className="kicker">PRIME NCR</span>
+              <h2>Three growth corridors</h2>
+            </div>
+            <Link href="/search" className="text-link">
+              Explore <ArrowRight size={16} />
+            </Link>
           </div>
-          <div className="home-category-grid">
-            {categories.map(({ title, text, icon: Icon, href, tone }) => (
-              <Link href={href} className={`home-category home-category-${tone}`} key={title}>
-                <div className="home-category-icon"><Icon size={26} /></div>
-                <div><h3>{title}</h3><p>{text}</p></div>
-                <ArrowRight size={19} className="home-category-arrow" />
+
+          <div className="corridor-grid">
+            {locations.map((item) => (
+              <Link
+                key={item.name}
+                href={`/search?q=${encodeURIComponent(item.query)}`}
+                className="corridor-card"
+              >
+                <div className="corridor-img">
+                  <img src={item.image} alt={item.route} loading="lazy" />
+                  <div className="location-chip">
+                    <MapPin size={16} /> {item.name}
+                  </div>
+                </div>
+                <div className="corridor-body">
+                  <span>{item.area}</span>
+                  <h3>{item.route}</h3>
+                  <div className="card-action">
+                    Search properties <ArrowRight size={15} />
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="home-section home-featured">
-        <div className="home-container">
-          <div className="home-section-head home-featured-head">
-            <div><span className="home-kicker">LISTINGS</span><h2>Featured properties</h2><p>A few opportunities to get you started.</p></div>
-            <Link href="/search" className="home-text-link">View all properties <ArrowRight size={17} /></Link>
+      <section className="section section-soft">
+        <div className="container">
+          <div className="heading-row">
+            <div>
+              <span className="kicker">CATEGORIES</span>
+              <h2>Find by type</h2>
+            </div>
           </div>
-          <div className="home-property-grid">
-            {properties.slice(0, 3).map((p) => (
-              <Link href={`/property/${p.id}`} className="home-property-card" key={p.id}>
-                <div className="home-property-image">
+
+          <div className="category-grid">
+            {categories.map(({ title, icon: Icon, href }) => (
+              <Link href={href} key={title} className="category-card">
+                <Icon size={28} />
+                <span>{title}</span>
+                <ArrowRight size={17} />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="heading-row">
+            <div>
+              <span className="kicker">FEATURED</span>
+              <h2>Popular properties</h2>
+            </div>
+            <Link href="/search" className="text-link">
+              View all <ArrowRight size={16} />
+            </Link>
+          </div>
+
+          <div className="property-grid">
+            {properties.slice(0, 4).map((p) => (
+              <Link href={`/property/${p.id}`} key={p.id} className="property-card">
+                <div className="property-image">
                   <img src={p.image} alt={p.title} loading="lazy" />
-                  {p.verified && <span className="home-verified"><ShieldCheck size={14} /> Verified</span>}
+                  {p.verified && (
+                    <span className="verified"><ShieldCheck size={12} /> Verified</span>
+                  )}
                 </div>
-                <div className="home-property-body">
-                  <div className="home-property-location"><MapPin size={14} /> {p.location}</div>
+                <div className="property-body">
+                  <div className="property-location">
+                    <MapPin size={13} /> {p.location}
+                  </div>
                   <h3>{p.title}</h3>
-                  <div className="home-property-row"><strong>{p.price}</strong><span>{p.area}</span></div>
-                  <div className="home-property-type">{p.type} <ChevronRight size={15} /></div>
+                  <div className="property-bottom">
+                    <strong>{p.price}</strong>
+                    <span>{p.area}</span>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -108,26 +219,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-section">
-        <div className="home-container home-why-grid">
+      <section className="sell-cta">
+        <div className="container sell-inner">
           <div>
-            <span className="home-kicker">WHY 1BIGHA</span>
-            <h2>Less clutter.<br />More confidence.</h2>
-            <p className="home-why-lead">Buying or selling land gets easier when the information is simple, visible and organised.</p>
-            <Link href="/about" className="home-outline-btn">Know more <ArrowRight size={17} /></Link>
+            <span className="kicker light">SELL ON 1BIGHA</span>
+            <h2>Have land to sell?</h2>
+            <p>List it on 1Bigha.</p>
           </div>
-          <div className="home-benefits">
-            <div><span>01</span><div><h3>Search around your location</h3><p>Start with a city, district, village or locality and narrow down from there.</p></div></div>
-            <div><span>02</span><div><h3>Compare useful property details</h3><p>See price, area, type, road access and listing information together.</p></div></div>
-            <div><span>03</span><div><h3>Connect when you're ready</h3><p>Send an enquiry, ask questions and take the next step directly.</p></div></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="home-seller-cta">
-        <div className="home-container home-seller-inner">
-          <div><span className="home-kicker home-kicker-light">SELL YOUR PROPERTY</span><h2>Have land to sell?</h2><p>Put your property in front of people who are actively looking.</p></div>
-          <Link href="/sell" className="home-seller-btn">Post your property <ArrowRight size={18} /></Link>
+          <Link href="/sell" className="sell-button">
+            List Property <ArrowRight size={17} />
+          </Link>
         </div>
       </section>
     </main>
