@@ -9,8 +9,8 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className="site-header">
-        <div className="site-container site-header-inner">
+      <header className="site-header">
+        <div className="container site-header-inner">
           <Link href="/" className="brand" aria-label="1Bigha home">
             <img src="/1bigha-logo.png" alt="1Bigha" className="brand-logo" />
           </Link>
@@ -18,26 +18,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav className="site-nav" aria-label="Main navigation">
             <Link href="/search">Buy</Link>
             <Link href="/sell">Sell</Link>
-            <Link href="/search?type=Agricultural%20Land">Agricultural</Link>
+            <Link href="/search?type=Agricultural%20Land">Land</Link>
             <Link href="/search?type=Residential%20Plot">Plots</Link>
-            <Link href="/search?q=Delhi%20NCR">Locations</Link>
-            <Link href="/search">Explore</Link>
+            <Link href="/search">About</Link>
           </nav>
 
           <div className="site-actions">
+            <Link href="/sell" className="site-post-btn">Post Property</Link>
+            <span className="language">English⌄</span>
             <Link href="/search" className="site-login">Login / Sign up</Link>
-            <Link href="/sell" className="site-post-btn">List Property</Link>
           </div>
         </div>
-      </div>
+      </header>
 
       {children}
 
       <footer className="site-footer">
-        <div className="site-container site-footer-grid">
-          <div>
+        <div className="container site-footer-grid">
+          <div className="footer-brand">
             <img src="/1bigha-logo.png" alt="1Bigha" className="footer-logo" />
-            <p>Land discovery made simpler with better search, clearer information and trusted local opportunities.</p>
+            <p>Land discovery made simple.</p>
           </div>
           <div>
             <h4>Explore</h4>
@@ -46,14 +46,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/search?type=Residential%20Plot">Residential Plots</Link>
           </div>
           <div>
-            <h4>For owners</h4>
+            <h4>For Owners</h4>
             <Link href="/sell">List Property</Link>
             <Link href="/sell">Sell Land</Link>
             <Link href="/search">Find Buyers</Link>
           </div>
+          <div>
+            <h4>Company</h4>
+            <Link href="/search">About</Link>
+            <Link href="/search">Contact</Link>
+            <Link href="/search">Help</Link>
+          </div>
         </div>
         <div className="site-footer-bottom">
-          <div className="site-container">© 2026 1Bigha. All rights reserved.</div>
+          <div className="container">© 2026 1Bigha. All rights reserved.</div>
         </div>
       </footer>
     </>
