@@ -1,0 +1,2 @@
+import Link from 'next/link'; import type {Property} from '@/lib/data';
+export default function PropertyCard({p}:{p:Property}){return <Link href={`/property/${p.id}`} className="card"><div className="imgwrap"><img src={p.image} alt={p.title}/>{p.verified&&<span className="badge">✓ Verified</span>}</div><div className="cardbody"><p className="cardtitle">{p.title}</p><div className="muted">📍 {p.location}</div><div className="price">{p.price}</div><div className="meta"><span className="pill">{p.area}</span><span className="pill">{p.type}</span></div></div></Link>}
