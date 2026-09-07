@@ -1,1 +1,146 @@
-export default function Sell(){return <main className="section"><div className="container"><div className="panel" style={{maxWidth:850,margin:'0 auto'}}><h1 style={{fontFamily:'Playfair Display,serif'}}>List your property</h1><p className="muted">Start with the essential information. We can add verification, payments and seller tools in later versions.</p><form className="formgrid"><input className="input" placeholder="Property title"/><select className="input"><option>Property type</option><option>Agricultural Land</option><option>Residential Plot</option><option>Commercial Plot</option><option>Farm Land</option></select><input className="input" placeholder="State"/><input className="input" placeholder="District / City"/><input className="input" placeholder="Area (e.g. 5 Bigha)"/><input className="input" placeholder="Price"/><input className="input full" placeholder="Road access / nearby landmark"/><textarea className="input full" rows={5} placeholder="Describe the property"/><input className="input full" type="file" multiple/><button className="btn primary full" type="button" onClick={()=>alert('Demo listing received. Seller dashboard will be connected in V2.')}>Submit Property</button></form></div></div></main>}
+'use client';
+
+import { useState } from 'react';
+
+export default function Sell() {
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+
+  return (
+    <main className="section">
+      <div className="container">
+        <div
+          className="panel"
+          style={{
+            maxWidth: 850,
+            margin: '0 auto',
+          }}
+        >
+          <h1>List Your Property</h1>
+
+          <p className="muted">
+            Share your property details with potential buyers on 1Bigha.
+          </p>
+
+          {submitted ? (
+            <div
+              style={{
+                padding: 24,
+                marginTop: 24,
+                borderRadius: 16,
+                background: '#e9f7ef',
+                border: '1px solid #b7dfc6',
+              }}
+            >
+              <h3 style={{ marginTop: 0 }}>
+                ✅ Property details received
+              </h3>
+
+              <p className="muted">
+                Thank you. Your listing information has been submitted
+                successfully.
+              </p>
+
+              <button
+                type="button"
+                className="btn primary"
+                onClick={() => setSubmitted(false)}
+              >
+                Add Another Property
+              </button>
+            </div>
+          ) : (
+            <form
+              className="formgrid"
+              onSubmit={handleSubmit}
+            >
+              <input
+                className="input"
+                name="title"
+                placeholder="Property title"
+                required
+              />
+
+              <select
+                className="input"
+                name="type"
+                defaultValue=""
+                required
+              >
+                <option value="" disabled>
+                  Property type
+                </option>
+                <option>Agricultural Land</option>
+                <option>Residential Plot</option>
+                <option>Commercial Plot</option>
+                <option>Farm Land</option>
+                <option>Industrial Land</option>
+              </select>
+
+              <input
+                className="input"
+                name="state"
+                placeholder="State"
+                required
+              />
+
+              <input
+                className="input"
+                name="city"
+                placeholder="District / City"
+                required
+              />
+
+              <input
+                className="input"
+                name="area"
+                placeholder="Area (e.g. 5 Bigha)"
+                required
+              />
+
+              <input
+                className="input"
+                name="price"
+                placeholder="Expected Price"
+                required
+              />
+
+              <input
+                className="input full"
+                name="road"
+                placeholder="Road access / nearby landmark"
+              />
+
+              <textarea
+                className="input full"
+                name="description"
+                rows={5}
+                placeholder="Describe the property"
+                required
+              />
+
+              <input
+                className="input full"
+                name="images"
+                type="file"
+                accept="image/*"
+                multiple
+              />
+
+              <button
+                className="btn primary full"
+                type="submit"
+              >
+                Submit Property
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+    </main>
+  );
+}
