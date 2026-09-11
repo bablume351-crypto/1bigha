@@ -21,7 +21,7 @@ export default function PropertyCard({ p }: { p: Property }) {
         </div>
       </Link>
       <div className="card-footer-actions">
-        <ShareButton title={p.title} />
+        <ShareButton title={p.title} location={p.location} />
         <Link href={`/property/${p.id}`} className="details-link">View details →</Link>
       </div>
     </article>

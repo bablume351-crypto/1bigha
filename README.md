@@ -33,3 +33,13 @@ The whole seller contact panel and each contact button open a centered mobile-lo
 
 ## Sell form update
 The sell form now includes mobile number, state dropdown, and a dependent district/city dropdown. The district list updates when the state changes. Client-side required validation is included.
+
+
+## V5 marketplace update
+- Responsive mobile navigation/menu
+- Search filters: city, property type, budget, verified
+- 10 featured/sample properties on homepage
+- Share button with native share/copy fallback
+- Existing contact-owner mobile login gate preserved
+- Existing sell form with mobile/state/district preserved
+- Next.js 15 compatible dynamic property route

@@ -1,5 +1,6 @@
 import './globals.css';
 import Link from 'next/link';
+import Header from '@/components/Header';
 
 export const metadata = {
   title: '1Bigha — Buy & Sell Land and Property',
@@ -9,31 +10,8 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="site-header">
-        <div className="container site-header-inner">
-          <Link href="/" className="brand" aria-label="1Bigha home">
-            <img src="/1bigha-logo.png" alt="1Bigha" className="brand-logo" />
-          </Link>
-
-          <nav className="site-nav" aria-label="Main navigation">
-            <Link href="/search">Buy</Link>
-            <Link href="/sell">Sell</Link>
-            <Link href="/search?type=Agricultural%20Land">Land</Link>
-            <Link href="/search?type=Residential%20Plot">Plots</Link>
-            <Link href="/search">About</Link>
-          </nav>
-
-          <div className="site-actions">
-            <Link href="/sell" className="site-post-btn">Post Property</Link>
-            <span className="language">English⌄</span>
-            <Link href="/login" className="site-login">Login / Sign up</Link>
-            <Link href="/login" className="site-mobile-login">Login</Link>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       {children}
-
       <footer className="site-footer">
         <div className="container site-footer-grid">
           <div className="footer-brand">
