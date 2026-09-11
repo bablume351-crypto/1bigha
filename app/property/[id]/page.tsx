@@ -1,7 +1,7 @@
 'use client';
 
 import { use, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ArrowLeft, Heart, MapPin, MessageCircle, Phone, Share2, ShieldCheck } from 'lucide-react';
 import ContactLoginModal from '@/components/ContactLoginModal';
 import { properties } from '@/lib/data';
@@ -10,6 +10,7 @@ type Props = { params: Promise<{ id: string }> };
 
 export default function PropertyPage({ params }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
   const { id } = use(params);
   const property = properties.find((p) => p.id === id);
   const [showLogin, setShowLogin] = useState(false);
@@ -176,7 +177,7 @@ export default function PropertyPage({ params }: Props) {
 
       {showLogin && (
         <ContactLoginModal
-          nextPath={window.location.pathname}
+          nextPath={pathname}
           onClose={() => setShowLogin(false)}
         />
       )}

@@ -43,3 +43,7 @@ The sell form now includes mobile number, state dropdown, and a dependent distri
 - Existing contact-owner mobile login gate preserved
 - Existing sell form with mobile/state/district preserved
 - Next.js 15 compatible dynamic property route
+
+
+## UI Complete V6
+Account, Admin, Tronica City Map reference, responsive navigation, search, sell, login and property contact/share UI are included. Backend/database/real OTP are intentionally not connected yet.

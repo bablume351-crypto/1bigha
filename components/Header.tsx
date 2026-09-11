@@ -21,7 +21,8 @@ export default function Header() {
           <Link href="/sell" onClick={close}>Sell</Link>
           <Link href="/search?type=Agricultural%20Land" onClick={close}>Land</Link>
           <Link href="/search?type=Residential%20Plot" onClick={close}>Plots</Link>
-          <Link href="/search" onClick={close}>Explore</Link>
+          <Link href="/map" onClick={close}>Map</Link>
+          <Link href="/account" onClick={close}>Account</Link>
         </nav>
 
         <div className="site-actions">
