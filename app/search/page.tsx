@@ -27,6 +27,7 @@ export default function SearchPage() {
   const [type, setType] = useState('');
   const [budget, setBudget] = useState('');
   const [verified, setVerified] = useState(false);
+  const [view, setView] = useState<'list' | 'map'>('list');
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
@@ -63,7 +64,7 @@ export default function SearchPage() {
             <h2>Find your property</h2>
             <p className="muted">{filtered.length} properties found</p>
           </div>
-          <button type="button" className="btn" onClick={clearFilters}>Clear filters</button>
+          <div style={{display:'flex',gap:8,flexWrap:'wrap'}}><button type="button" className={view === 'list' ? 'btn primary' : 'btn'} onClick={() => setView('list')}>☷ List</button><button type="button" className={view === 'map' ? 'btn primary' : 'btn'} onClick={() => setView('map')}>⌖ Map</button><button type="button" className="btn" onClick={clearFilters}>Clear filters</button></div>
         </div>
 
         <div className="searchlayout">
@@ -105,7 +106,15 @@ export default function SearchPage() {
           </aside>
 
           <section>
-            {filtered.length ? (
+            {view === 'map' ? (
+              <div className="panel" style={{minHeight:420,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',textAlign:'center',background:'linear-gradient(135deg,#eef7ef,#f8fbf8)'}}>
+                <div style={{fontSize:48}}>⌖</div>
+                <h2>Property Map</h2>
+                <p className="muted">Map view for {city || 'NCR'} properties</p>
+                <p className="muted">Live map pins will be connected with real coordinates in the backend phase.</p>
+                <button type="button" className="btn primary" onClick={() => setView('list')}>Back to List</button>
+              </div>
+            ) : filtered.length ? (
               <div className="results">{filtered.map((p) => <PropertyCard key={p.id} p={p} />)}</div>
             ) : (
               <div className="empty">
