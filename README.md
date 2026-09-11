@@ -9,3 +9,7 @@ Updates:
 - Expressway hero sections for Tronica City, Ghaziabad and Baghpat
 
 Upload the CONTENTS of this folder to the GitHub repository root.
+
+
+## Contact/Login flow
+Properties are viewable without login. Seller contact actions (owner details, WhatsApp, shortlist) open a mobile-login gate. Real SMS OTP still requires an SMS provider and production auth/session setup.
