@@ -13,3 +13,7 @@ Upload the CONTENTS of this folder to the GitHub repository root.
 
 ## Contact/Login flow
 Properties are viewable without login. Seller contact actions (owner details, WhatsApp, shortlist) open a mobile-login gate. Real SMS OTP still requires an SMS provider and production auth/session setup.
+
+
+## Next.js 15 fix
+Dynamic property route uses Promise-based `params` with React `use(params)` so `/property/[id]` type-checks on Next.js 15.

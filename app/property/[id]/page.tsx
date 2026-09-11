@@ -1,15 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, CheckCircle2, Heart, MapPin, MessageCircle, Phone, Share2, ShieldCheck } from 'lucide-react';
 import { properties } from '@/lib/data';
 
-type Props = { params: { id: string } };
+type Props = { params: Promise<{ id: string }> };
 
 export default function PropertyPage({ params }: Props) {
   const router = useRouter();
-  const property = properties.find((p) => p.id === params.id);
+  const { id } = use(params);
+  const property = properties.find((p) => p.id === id);
   const [showLogin, setShowLogin] = useState(false);
 
   if (!property) {
