@@ -21,3 +21,11 @@ Dynamic property route uses Promise-based `params` with React `use(params)` so `
 
 ## TypeScript narrowing fix
 The property detail page stores the narrowed property object in `currentProperty` so async share handlers do not trigger `possibly undefined` errors during Vercel type-checking.
+
+
+## Modal fix
+The seller-contact login modal now uses inline overlay styles so it reliably renders above the property page even if stylesheet caching or CSS replacement occurs.
+
+
+## Contact popup v2
+The whole seller contact panel and each contact button open a centered mobile-login modal. Phone, WhatsApp, and shortlist icons are bold and clearly visible.

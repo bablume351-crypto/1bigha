@@ -2,7 +2,8 @@
 
 import { use, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, CheckCircle2, Heart, MapPin, MessageCircle, Phone, Share2, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, MessageCircle, Phone, Share2, ShieldCheck } from 'lucide-react';
+import ContactLoginModal from '@/components/ContactLoginModal';
 import { properties } from '@/lib/data';
 
 type Props = { params: Promise<{ id: string }> };
@@ -114,53 +115,70 @@ export default function PropertyPage({ params }: Props) {
             </div>
           </div>
 
-          <aside className="panel seller-panel">
+          <aside
+            className="panel seller-panel"
+            onClick={requireLogin}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') requireLogin();
+            }}
+            style={{ cursor: 'pointer' }}
+          >
             <h3>Interested in this property?</h3>
             <p className="muted">
-              View seller details or contact the owner after mobile verification.
+              Contact the owner, request a call or save this property.
             </p>
 
-            <button className="btn primary full" onClick={requireLogin}>
-              <Phone size={17} /> View Owner Details
+            <button
+              type="button"
+              className="btn primary full"
+              onClick={(e) => {
+                e.stopPropagation();
+                requireLogin();
+              }}
+              style={{ fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9 }}
+            >
+              <Phone size={19} strokeWidth={2.8} /> Contact Owner
             </button>
 
-            <button className="btn full contact-alt" onClick={requireLogin}>
-              <MessageCircle size={17} /> WhatsApp Owner
+            <button
+              type="button"
+              className="btn full contact-alt"
+              onClick={(e) => {
+                e.stopPropagation();
+                requireLogin();
+              }}
+              style={{ fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9 }}
+            >
+              <MessageCircle size={20} strokeWidth={2.8} /> WhatsApp Owner
             </button>
 
-            <button className="btn full contact-alt" onClick={requireLogin}>
-              <Heart size={17} /> Shortlist Property
+            <button
+              type="button"
+              className="btn full contact-alt"
+              onClick={(e) => {
+                e.stopPropagation();
+                requireLogin();
+              }}
+              style={{ fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9 }}
+            >
+              <Heart size={19} strokeWidth={2.8} /> Shortlist Property
             </button>
 
             <div className="login-note">
-              <ShieldCheck size={16} />
-              Login is required only when you contact the seller.
+              <ShieldCheck size={16} strokeWidth={2.6} />
+              Mobile login is required only for contact actions.
             </div>
           </aside>
         </div>
       </div>
 
       {showLogin && (
-        <div className="modal-backdrop" onClick={() => setShowLogin(false)}>
-          <div className="login-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="login-modal-icon"><ShieldCheck size={24} /></div>
-            <h2>Continue with mobile</h2>
-            <p className="muted">
-              You can view the property without login. Verify your mobile number only to contact the seller.
-            </p>
-            <button
-              className="btn primary full"
-              onClick={() =>
-                router.push(`/login?next=${encodeURIComponent(window.location.pathname)}`)
-              }
-            >
-              Continue to Login
-            </button>
-            <button className="btn full" onClick={() => setShowLogin(false)}>
-              Maybe Later
-            </button>
-          </div>
-        </div>
+        <ContactLoginModal
+          nextPath={window.location.pathname}
+          onClose={() => setShowLogin(false)}
+        />
       )}
     </main>
   );
