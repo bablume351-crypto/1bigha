@@ -27,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/sell" className="site-post-btn">Post Property</Link>
             <span className="language">English⌄</span>
             <Link href="/login" className="site-login">Login / Sign up</Link>
+            <Link href="/login" className="site-mobile-login">Login</Link>
           </div>
         </div>
       </header>

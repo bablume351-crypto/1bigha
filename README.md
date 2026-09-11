@@ -1,9 +1,11 @@
-# 1Bigha Homepage V3
+# 1Bigha Homepage V4
 
-- 10 demo properties focused on Tronica City + nearby NCR cities
-- City selector in hero and search filters
-- Login / Sign up mobile-first OTP interface at `/login`
-- 3 expressway corridors
-- Responsive desktop/mobile UI
+Updates:
+- Share button on every property card
+- Share button on property detail pages
+- Mobile Login button in header
+- 10 NCR/UP demo properties
+- City + property-type search/filter
+- Expressway hero sections for Tronica City, Ghaziabad and Baghpat
 
-Important: the login flow is UI-ready. Connect a real SMS/OTP provider before production launch.
+Upload the CONTENTS of this folder to the GitHub repository root.
