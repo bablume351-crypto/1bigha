@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: '1Bigha — Buy & Sell Land and Property',
-  description: 'Discover land, plots and property opportunities across India.',
+  description: 'Discover land, plots and property opportunities across NCR.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="site-actions">
             <Link href="/sell" className="site-post-btn">Post Property</Link>
             <span className="language">English⌄</span>
-            <Link href="/search" className="site-login">Login / Sign up</Link>
+            <Link href="/login" className="site-login">Login / Sign up</Link>
           </div>
         </div>
       </header>
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="container site-footer-grid">
           <div className="footer-brand">
             <img src="/1bigha-logo.png" alt="1Bigha" className="footer-logo" />
-            <p>Land discovery made simple.</p>
+            <p>Your land, your future.</p>
           </div>
           <div>
             <h4>Explore</h4>
@@ -52,9 +52,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/search">Find Buyers</Link>
           </div>
           <div>
-            <h4>Company</h4>
-            <Link href="/search">About</Link>
-            <Link href="/search">Contact</Link>
+            <h4>Account</h4>
+            <Link href="/login">Login / Sign up</Link>
             <Link href="/search">Help</Link>
           </div>
         </div>

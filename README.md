@@ -1,14 +1,9 @@
-# 1Bigha Homepage
+# 1Bigha Homepage V3
 
-Clean marketplace homepage with:
-- 1Bigha logo
-- One main property search
-- Tronica City + Delhi–Meerut Expressway
-- Ghaziabad + Eastern Peripheral Expressway
-- Baghpat + Delhi–Dehradun Expressway
-- Property categories
-- Featured properties
-- Sell CTA
-- Responsive mobile layout
+- 10 demo properties focused on Tronica City + nearby NCR cities
+- City selector in hero and search filters
+- Login / Sign up mobile-first OTP interface at `/login`
+- 3 expressway corridors
+- Responsive desktop/mobile UI
 
-Upload the CONTENTS of this folder to the GitHub repository root.
+Important: the login flow is UI-ready. Connect a real SMS/OTP provider before production launch.
