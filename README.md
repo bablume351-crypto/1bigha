@@ -17,3 +17,7 @@ Properties are viewable without login. Seller contact actions (owner details, Wh
 
 ## Next.js 15 fix
 Dynamic property route uses Promise-based `params` with React `use(params)` so `/property/[id]` type-checks on Next.js 15.
+
+
+## TypeScript narrowing fix
+The property detail page stores the narrowed property object in `currentProperty` so async share handlers do not trigger `possibly undefined` errors during Vercel type-checking.

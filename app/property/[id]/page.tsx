@@ -23,10 +23,12 @@ export default function PropertyPage({ params }: Props) {
     );
   }
 
+  const currentProperty = property;
+
   async function shareProperty() {
     const shareData = {
-      title: property.title,
-      text: `${property.title} — ${property.location} — ${property.price}`,
+      title: currentProperty.title,
+      text: `${currentProperty.title} — ${currentProperty.location} — ${currentProperty.price}`,
       url: window.location.href,
     };
 
@@ -65,25 +67,25 @@ export default function PropertyPage({ params }: Props) {
         </div>
 
         <div className="gallery">
-          <img src={property.image} alt={property.title} />
+          <img src={currentProperty.image} alt={currentProperty.title} />
           <div className="gallery-side">
-            <img className="small" src={property.image} alt="Property view" />
-            <img className="small" src={property.image} alt="Property view" />
+            <img className="small" src={currentProperty.image} alt="Property view" />
+            <img className="small" src={currentProperty.image} alt="Property view" />
           </div>
         </div>
 
         <div className="detailgrid">
           <div className="panel">
             <div className="detail-location">
-              <MapPin size={17} /> {property.location}
+              <MapPin size={17} /> {currentProperty.location}
             </div>
 
             <div className="detail-title-row">
               <div>
-                <h1>{property.title}</h1>
-                <div className="detail-price">{property.price}</div>
+                <h1>{currentProperty.title}</h1>
+                <div className="detail-price">{currentProperty.price}</div>
               </div>
-              {property.verified && (
+              {currentProperty.verified && (
                 <span className="verified-large">
                   <ShieldCheck size={15} /> Verified
                 </span>
@@ -91,24 +93,24 @@ export default function PropertyPage({ params }: Props) {
             </div>
 
             <div className="meta">
-              <span className="pill">{property.area}</span>
-              <span className="pill">{property.type}</span>
-              <span className="pill">{property.road}</span>
+              <span className="pill">{currentProperty.area}</span>
+              <span className="pill">{currentProperty.type}</span>
+              <span className="pill">{currentProperty.road}</span>
             </div>
 
-            <p className="detail-description">{property.description}</p>
+            <p className="detail-description">{currentProperty.description}</p>
 
             <div className="featurelist">
-              <div className="feature"><b>Area</b><br />{property.area}</div>
-              <div className="feature"><b>Road</b><br />{property.road}</div>
-              <div className="feature"><b>Location</b><br />{property.city}</div>
-              <div className="feature"><b>Listing</b><br />{property.verified ? 'Verified' : 'Standard'}</div>
+              <div className="feature"><b>Area</b><br />{currentProperty.area}</div>
+              <div className="feature"><b>Road</b><br />{currentProperty.road}</div>
+              <div className="feature"><b>Location</b><br />{currentProperty.city}</div>
+              <div className="feature"><b>Listing</b><br />{currentProperty.verified ? 'Verified' : 'Standard'}</div>
             </div>
 
             <h3>Location</h3>
             <div className="mapbox">
               <MapPin size={20} />
-              {property.location}
+              {currentProperty.location}
             </div>
           </div>
 
