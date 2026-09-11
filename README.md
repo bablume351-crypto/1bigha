@@ -29,3 +29,7 @@ The seller-contact login modal now uses inline overlay styles so it reliably ren
 
 ## Contact popup v2
 The whole seller contact panel and each contact button open a centered mobile-login modal. Phone, WhatsApp, and shortlist icons are bold and clearly visible.
+
+
+## Sell form update
+The sell form now includes mobile number, state dropdown, and a dependent district/city dropdown. The district list updates when the state changes. Client-side required validation is included.
