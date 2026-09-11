@@ -4,6 +4,16 @@ import { useEffect, useMemo, useState } from 'react';
 import PropertyCard from '@/components/PropertyCard';
 import { cities, properties } from '@/lib/data';
 
+const mapLocations: Record<string, { lat: number; lon: number }> = {
+  'Tronica City': { lat: 28.7507, lon: 77.2821 },
+  Ghaziabad: { lat: 28.6692, lon: 77.4538 },
+  Loni: { lat: 28.7526, lon: 77.2905 },
+  Baghpat: { lat: 28.9448, lon: 77.2189 },
+  'Greater Noida': { lat: 28.4744, lon: 77.504 },
+  Noida: { lat: 28.5355, lon: 77.391 },
+  Delhi: { lat: 28.6139, lon: 77.209 },
+};
+
 const budgetOptions = [
   { value: '', label: 'Any budget' },
   { value: 'under50', label: 'Under ₹50 Lakh' },
@@ -46,6 +56,9 @@ export default function SearchPage() {
     const matchesVerified = !verified || p.verified;
     return matchesQ && matchesCity && matchesType && matchesBudget && matchesVerified;
   }), [q, city, type, budget, verified]);
+
+  const mapCenter = mapLocations[city] || mapLocations['Tronica City'];
+  const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${mapCenter.lon - 0.16}%2C${mapCenter.lat - 0.12}%2C${mapCenter.lon + 0.16}%2C${mapCenter.lat + 0.12}&layer=mapnik&marker=${mapCenter.lat}%2C${mapCenter.lon}`;
 
   function clearFilters() {
     setQ('');
@@ -107,12 +120,13 @@ export default function SearchPage() {
 
           <section>
             {view === 'map' ? (
-              <div className="panel" style={{minHeight:420,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',textAlign:'center',background:'linear-gradient(135deg,#eef7ef,#f8fbf8)'}}>
-                <div style={{fontSize:48}}>⌖</div>
-                <h2>Property Map</h2>
-                <p className="muted">Map view for {city || 'NCR'} properties</p>
-                <p className="muted">Live map pins will be connected with real coordinates in the backend phase.</p>
-                <button type="button" className="btn primary" onClick={() => setView('list')}>Back to List</button>
+              <div className="panel" style={{padding:0,overflow:'hidden'}}>
+                <div style={{padding:'18px 20px 8px'}}><h2 style={{marginBottom:4}}>Property Map</h2><p className="muted">{city || 'NCR'} property locations</p></div>
+                <iframe title="1Bigha property map" src={mapUrl} style={{width:'100%',height:390,border:0}} loading="lazy" />
+                <div style={{padding:18}}><h3 style={{marginTop:0}}>Properties in this search</h3>
+                  {filtered.length ? <div style={{display:'grid',gap:10}}>{filtered.map((p) => <div key={p.id} style={{display:'flex',justifyContent:'space-between',gap:12,alignItems:'center',border:'1px solid #e1e8e3',borderRadius:12,padding:'12px 14px'}}><div><b>{p.title}</b><div className="muted" style={{fontSize:13}}>{p.city} · {p.area}</div></div><button className="btn" type="button" onClick={() => setView('list')}>View</button></div>)}</div> : <p className="muted">No properties match these filters.</p>}
+                  <p className="muted" style={{fontSize:12,marginBottom:0,marginTop:14}}>Map shows the selected area reference. Exact plot coordinates will be connected in the backend phase.</p>
+                </div>
               </div>
             ) : filtered.length ? (
               <div className="results">{filtered.map((p) => <PropertyCard key={p.id} p={p} />)}</div>
